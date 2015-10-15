@@ -32,7 +32,7 @@ class MetricsController < ActionController::Base
 		hsh["name"] = "Current Device Installs"
 		data_arr = []
 		(2..spreadsheet.last_row).map do |i|
-			data_arr.push([spreadsheet.row(i)[0],spreadsheet.row(i)[2]])
+			data_arr.push([spreadsheet.row(i)[0],spreadsheet.row(i)[2].to_i])
 		end
 		p "====================="
 		p data_arr
