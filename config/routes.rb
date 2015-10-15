@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get 'about'   => 'static_pages#about'
   get 'contact' => 'static_pages#contact'
   get 'sign_up' => 'users#new'
+  get '/show_data' => "metrics#show_metrics"
+  resources :users
 
 
 
