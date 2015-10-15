@@ -5,9 +5,6 @@ class MetricsController < ActionController::Base
 
 	def show_metrics
 		@data = get_data
-		p "====================="
-		p @data
-		p "====================="
 		respond_to do |format|
 			format.html
 			format.json { render json: @data }
@@ -34,11 +31,30 @@ class MetricsController < ActionController::Base
 		(2..spreadsheet.last_row).map do |i|
 			data_arr.push([spreadsheet.row(i)[0],spreadsheet.row(i)[2].to_i])
 		end
-		p "====================="
-		p data_arr
-		p "====================="
 		hsh["data"] = data_arr
 		series_arr.push(hsh)
+
+		hsh = {}
+		hsh["name"] = "Daily Device Installs"
+		data_arr = []
+		(2..spreadsheet.last_row).map do |i|
+			data_arr.push([spreadsheet.row(i)[0],spreadsheet.row(i)[3].to_i])
+		end
+		hsh["data"] = data_arr
+
+		series_arr.push(hsh)
+
+		hsh = {}
+		hsh["name"] = "Daily Device Uninstalls"
+		data_arr = []
+		(2..spreadsheet.last_row).map do |i|
+			data_arr.push([spreadsheet.row(i)[0],spreadsheet.row(i)[4].to_i])
+		end
+		hsh["data"] = data_arr
+
+		series_arr.push(hsh)
+
+
 	end
 
 end
